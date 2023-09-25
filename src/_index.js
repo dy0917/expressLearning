@@ -23,7 +23,6 @@ app.use('/', todoRoute);
 app.get('/hi', (req, res) => {
   res.send('Hi!');
 });
-app.get('students', () => {});
 
 app.get('/hi/:id', (req, res) => {
   console.log(req);

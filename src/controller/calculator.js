@@ -1,7 +1,5 @@
-const valD = 1000;
-
 const add = (num1, num2) => {
-  return num1 + num2 + valD;
+  return parseFloat(num1) + parseFloat(num2);
 };
 
 const minus = (num1, num2) => {

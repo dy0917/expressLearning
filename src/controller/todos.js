@@ -13,7 +13,7 @@ class TodoLib {
     return this.#todos;
   }
   createTodo(title) {
-    const maxId = Math.max(...todos.map((todo) => todo.id));
+    const maxId = Math.max(...this.#todos.map((todo) => todo.id));
     const newTodo = {
       id: maxId + 1,
       title,
@@ -21,6 +21,15 @@ class TodoLib {
       createdAt: new Date().toLocaleDateString(),
     };
     this.#todos.push(newTodo);
+    console.log(this.#todos);
+  }
+
+  deleteTodo(id) {
+    const todoIndex = this.#todos.findIndex((todo) => todo.id == id);
+    if (todoIndex < 0) {
+      throw new Error(`${id} is not existed`);
+    }
+    this.#todos.splice(todoIndex, 1);
   }
 }
 

@@ -2,12 +2,16 @@ const express = require('express');
 const userLib = require('./controller/user');
 const todoLib = require('./controller/todos');
 const cors = require('cors');
-
+const cal = require('./controller/calculator');
 const controllers = require('./controller');
 const routers = require('./routes');
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('../swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const asyncFunction = (a) =>
   new Promise((resolve) => {
@@ -34,17 +38,27 @@ const main = async () => {
       next();
     }
   });
+
+  app.get('/calculator/add', (req, res) => {
+    const num1 = req.query.num1;
+    const num2 = req.query.num2;
+    const result = cal.add(num1, num2);
+    res.status(200).json({ result });
+  });
+
   app.get('/', (req, res) => {
     res.send('hello world');
   });
 
   app.get('/todos', (req, res) => {
+    controllers.calculator.add(1, 3);
     res.json(todoLib.getAllTodos());
   });
 
   app.post('/todos', (req, res) => {
     const title = req.body.title;
     const newTodo = todoLib.createTodo(title);
+    // console.log('newTodo', newTodo);
     res.status(200).json(newTodo);
   });
 

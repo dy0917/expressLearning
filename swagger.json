@@ -1,0 +1,86 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Todo project",
+    "description": "My Todo project API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Calculator",
+      "description": "API for Calculus in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/todos/{id}": {
+      "delete": {
+        "tags": ["delete todos Api"],
+        "summary": "delete todos",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "id of todo",
+            "name": "id",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete todo by id"
+          }
+        }
+      }
+    },
+    "/todos": {
+      "get": {
+        "tags": ["get todos Api"],
+        "summary": "Get all todos",
+        "responses": {
+          "200": {
+            "description": "Get all todos"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Add todo Service"],
+        "summary": "Add todo to todoList!",
+        "parameters": [
+          {
+            "in": "body",
+            "description": "body of todo",
+            "name": "todo",
+            "schema": {
+              "type": "object",
+              "required": ["title"],
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "completed": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This service allows you to add add todo to todoList"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,32 @@
 const calculator = require('./calculator');
 const user = require('./user');
 
+class Controllers {
+  constructor(libA) {
+    this.libA = libA;
+  }
+
+  initControllers() {
+    const allC = { calculator, user };
+    return Object.keys(allC).map((key) => {
+      console.log(key);
+      const a = Object.fromEntries(
+        Object.entries(allC[key]).map((entry) => {
+          return [entry[0], loggingTimingDecorator(entry[1])];
+        })
+      );
+      return { [key]: a };
+    });
+
+    //   return { calculator, user }.map((controller) => {
+    //     return Object.fromEntries(
+    //       Object.entries(controller).map((entry) => {
+    //         return [entry[0], loggingTimingDecorator(entry[1])];
+    //       })
+    //     );
+    //   });
+  }
+}
 function loggingTimingDecorator(originalFunction) {
   // same decorator function as before
   return function () {
@@ -21,6 +47,8 @@ const nCal = Object.fromEntries(
     return [entry[0], loggingTimingDecorator(entry[1])];
   })
 );
-console.log(nCal.add(1, 3));
 
-module.exports = { calculator, user };
+const controllersLib = new Controllers();
+const libs = controllersLib.initControllers();
+console.log('libs', ...libs);
+module.exports = { calculator: nCal, user };
