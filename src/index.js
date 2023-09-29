@@ -58,7 +58,6 @@ const main = async () => {
   app.post('/todos', (req, res) => {
     const title = req.body.title;
     const newTodo = todoLib.createTodo(title);
-    // console.log('newTodo', newTodo);
     res.status(200).json(newTodo);
   });
 
