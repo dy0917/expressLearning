@@ -16,7 +16,7 @@ const asyncFunction = (a) =>
 
 const main = async () => {
   const a = await asyncFunction(30);
-  const ports = [3000, 3001];
+  const ports = [8080];
 
   routers.forEach((thisRouters) => app.use('/', thisRouters));
   const createdAt = new Date().toLocaleDateString();
