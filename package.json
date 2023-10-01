@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js",
-    "start": "noide src/index.js"
+    "dev": "nodemon src/app.js",
+    "start": "noide src/app.js"
   },
   "keywords": [],
   "author": "",
