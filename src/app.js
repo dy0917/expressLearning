@@ -9,10 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const swaggerUi = require('swagger-ui-express');
-swaggerDocument = require('../swagger.json');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 const asyncFunction = (a) =>
   new Promise((resolve) => {
     resolve(a);
