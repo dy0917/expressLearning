@@ -19,13 +19,6 @@ const main = async () => {
   const ports = [8080];
 
   routers.forEach((thisRouters) => app.use('/', thisRouters));
-  const createdAt = new Date().toLocaleDateString();
-  const todos = [
-    { id: 1, title: 'Anthony Albanese', completed: false, createdAt },
-    { id: 2, title: 'Joe Biden', completed: false, createdAt },
-    { id: 3, title: 'Chris Hipkins', completed: false, createdAt },
-    { id: 4, title: 'Lee Hsien Loong', completed: false, createdAt },
-  ];
 
   app.use((req, res, next) => {
     if (!userLib.verifyUser(1, 22)) {
@@ -53,8 +46,9 @@ const main = async () => {
 
   app.post('/todos', (req, res) => {
     const title = req.body.title;
-    const newTodo = todoLib.createTodo(title);
-    res.status(200).json(newTodo);
+    const todo = todoLib.createTodo(title);
+
+    res.status(200).json({ todo });
   });
 
   app.put('/todos/:id', (req, res, next) => {

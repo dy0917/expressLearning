@@ -21,7 +21,19 @@ class TodoLib {
       createdAt: new Date().toLocaleDateString(),
     };
     this.#todos.push(newTodo);
-    console.log(this.#todos);
+    return newTodo;
+  }
+  updateTodo(id, incomingTodo) {
+    const oldTodo = this.#todos.find((todo) => todo.id == id);
+
+    if (!oldTodo) {
+      throw new Error(`${id} is not existed`);
+    }
+    // todowith updated data
+    const updatedTodo = { ...oldTodo, ...incomingTodo };
+    const todoIndex = this.#todos.findIndex((todo) => todo.id == id);
+    this.#todos.splice(todoIndex, 1, updatedTodo);
+    return updatedTodo;
   }
 
   deleteTodo(id) {
